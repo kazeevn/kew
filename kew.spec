@@ -30,7 +30,7 @@ BuildRequires:  faad2-devel
 kew is a terminal music player with a customizable interface, playlist management, and support for various audio formats.
 
 %prep
-%autosetup -n %{name}-%{version}
+{{{ git_dir_setup_macro }}}
 
 %build
 %make_build
@@ -44,5 +44,5 @@ make install DESTDIR=%{buildroot} PREFIX=%{_prefix}
 %{_mandir}/man1/kew.1.gz
 
 %changelog
-* Sun Oct 05 2025 Jules - 3.5.0-1
-- Initial RPM release.
+{{{ git_dir_changelog }}}
+
