@@ -13,6 +13,7 @@ Source0:        kew-%{version}.tar.gz
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  make
+BuildRequires:  libatomic
 BuildRequires:  pkg-config
 BuildRequires:  taglib-devel
 BuildRequires:  fftw-devel
