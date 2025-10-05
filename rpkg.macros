@@ -21,9 +21,15 @@ function custom_format_version_from_git {
     local hash=$(echo "$version_info" | rev | cut -d- -f1 | rev)
     local version=$(echo "$version_info" | rev | cut -d- -f3- | rev)
     
-    # Build release string: commits.hash
-    local release="${commits}.${hash}"
+    # Convert hyphens to underscores in version (for tags like v3.0.0-rc1 or stable-musl)
+    version=${version//-/_}
+    
+    # Build release string: commits.hash (empty if commits=0)
+    local commit_count_appendix=""
+    if [ "$commits" != "0" ]; then
+        commit_count_appendix=".git.${commits}.${hash}"
+    fi
     
     # Output in format: name-version-release
-    echo "${name}-${version}-${release}"
+    echo ${version}${commit_count_appendix}
 }
