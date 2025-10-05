@@ -1,14 +1,15 @@
 %global debug_package %{nil}
 %define _hardened_build 1
 
-Name:           kew
-Version:        3.5.0
+Name:           {{{ git_dir_name }}}
+Version:        {{{ git_dir_version }}}
 Release:        1%{?dist}
 Summary:        Terminal music player
 
-License:        GPLv3
-URL:            https://codeberg.org/ravachol/kew
-Source0:        kew-%{version}.tar.gz
+License:        GPLv2
+URL:            https://github.com/ravachol/kew
+VCS:            {{{ git_dir_vcs }}}
+Source:         {{{ git_dir_pack }}}
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
