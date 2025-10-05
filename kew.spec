@@ -2,7 +2,7 @@
 %define _hardened_build 1
 
 Name:           {{{ git_dir_name }}}
-Version:        {{{ git_dir_version }}}
+Version:        {{{ custom_format_version_from_git }}}
 Release:        1%{?dist}
 Summary:        Terminal music player
 

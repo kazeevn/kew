@@ -1,0 +1,29 @@
+function custom_format_version_from_git {
+    # Get the repository name
+    local name=$(basename "$(git rev-parse --show-toplevel)")
+    
+    # Get version info from git describe
+    # Format: v3.4.1-147-g9b35d8f (tag-commits_since_tag-g<short_hash>)
+    local describe=$(git describe --tags --long 2>/dev/null)
+    
+    if [ -z "$describe" ]; then
+        echo "Error: No git tags found" >&2
+        return 1
+    fi
+    
+    # Parse the git describe output
+    # Remove 'v' prefix from tag and split into components
+    local version_info=${describe#v}  # Remove leading 'v'
+    
+    # Extract version (tag), commits since tag, and git hash
+    # Format after removing 'v': 3.4.1-147-g9b35d8f
+    local commits=$(echo "$version_info" | rev | cut -d- -f2 | rev)
+    local hash=$(echo "$version_info" | rev | cut -d- -f1 | rev)
+    local version=$(echo "$version_info" | rev | cut -d- -f3- | rev)
+    
+    # Build release string: commits.hash
+    local release="${commits}.${hash}"
+    
+    # Output in format: name-version-release
+    echo "${name}-${version}-${release}"
+}
